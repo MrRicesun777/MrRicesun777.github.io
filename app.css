@@ -1,0 +1,713 @@
+/* setup fonts */
+
+@font-face {
+    font-family: BerlinSans;
+    src: url(./fonts/BerlinSansFBDemiBold/BerlinSansFBDemiBold.ttf);
+}
+
+@font-face {
+    font-family: MyriadProBold;
+    src: url(./fonts/MyriadPro/MyriadProBold.ttf);
+}
+
+@font-face {
+    font-family: MyriadProRegular;
+    src: url(./fonts/MyriadPro/MyriadProRegular.ttf);
+}
+
+@font-face {
+    font-family: Bauhaus93;
+    src: url(./fonts/Bauhaus93/Bauhaus93Regular.ttf);
+}
+
+
+
+:root {
+    --main-color: #460C0B;
+    --body-bg: #000;
+    --txt-color: #FEC629;
+    --header-size: 127px;
+
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--body-bg);
+    color: var(--txt-color);
+    font-family: MyriadProRegular;
+}
+
+header {
+    height: var(--header-size);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 98px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+.logo img {
+    display: block; 
+    width: var(--logo-size);
+    outline: none;
+    margin-right: 170px;
+    margin-top: 370px;
+}
+
+.main-menu {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.main-menu a {
+    font-family: MyriadProBold;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+    color: var(--txt-color);
+    text-transform: capitalize;
+    font-size: 30px;
+    transition: color 0.2s ease-in-out;
+}
+
+.main-menu > li ~ li {
+    margin-left: 74px;
+}
+
+.mb-menu-toggle {
+    position: absolute;
+    right: 10px;
+    display: none;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    padding-left: 98px;
+    overflow: hidden;
+    padding-top: var(--header-size);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 98;
+    padding-top: var(--header-size);
+    padding-left: 98px;
+}
+
+.slider {
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    display: flex;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+}
+
+.dish-info,
+.dish-img {
+    width: 50%;
+    position: relative;
+}
+
+.dish-img > img {
+    position: absolute;
+    width: calc(100% + 768px);
+    top: -385px;
+    left: -350px;
+    transform: translateX(450px) rotate(28deg);
+    transition: transform 1s ease-in-out;
+}
+
+
+.slide.active .dish-img > img {
+    transform: translateX(0) rotate(0);
+}
+
+.dish-name {
+    width: max-content;
+}
+
+.dish-name > h2 {
+    font-family: sans-serif;
+    text-transform: capitalize;
+    margin-top: 100px;
+    font-size: 290px;
+    font-weight: 600;
+    width: max-content;
+}
+
+.dish-description > p {
+    font-size: 23.76px;
+    line-height: 36px;
+    width: 34em;
+}
+
+.dish-name,
+.dish-description {
+    overflow: hidden;
+}
+.dish-name > h2,
+.dish-description > p {
+    transform: translateY(-100%);
+    transition: transform 0.9s ease-in-out;
+}
+
+.slide.active .dish-name > h2,
+.slide.active .dish-description > p {
+    transform: translateY(0);
+}
+
+.dish-description,
+.slide .btn {
+    margin-top: 60px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--main-color);
+    overflow: hidden;
+    width: 0;
+    height: 80px;
+    border-radius: 0;
+    background-color: var(--main-color);
+    font-family: Bauhaus93;
+    font-size: 30px;
+    text-transform: uppercase;
+    box-shadow: 0 0 54px 2px #4e4e4e;
+    transition: transform 0.2s ease-in-out, width 0.6s ease-in-out,
+        color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    transition-delay: 0s, 0.9s, 1.5s, 1.5s;
+}
+
+.slide.active .btn {
+    width: 336px;
+    color: var(--txt-color);
+    border-radius: 40px;
+}
+
+.slider-control {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    z-index: 98;
+}
+
+.slider-control-item {
+    --size: 120px;
+    width: var(--size);
+    height: var(--size);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.slider-control-item ~ .slider-control-item {
+    margin-left: 30px;
+}
+
+.slider-control-item > img {
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+@media (hover: hover) {
+    /* put hover css here */
+    .main-menu a:hover {
+        color: var(--main-color);
+    }
+
+    .slider-control-item:hover > img {
+        transform: translateY(-20px) rotate(10deg);
+    }
+
+    .btn:hover {
+        transform: translateY(-10px);
+    }
+}
+
+@media screen and (max-width: 844px) {
+    :root {
+        --header-size: 50px;
+    }
+
+    header {
+        /* display: block;
+        padding-left: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center; */
+        display: flex; /* Zorg ervoor dat de header wordt weergegeven */
+        align-items: center;
+        justify-content: space-between; /* Zorg ervoor dat de inhoud van de header goed wordt uitgelijnd */
+        padding: 10px 20px; /* Voeg wat padding toe voor een betere weergave */
+   
+    }
+
+    
+
+    .logo img {
+        width: 70%;
+        display: flex;
+        padding: 10px;
+        margin-top: 220px;
+    }
+    
+
+    
+
+    .main-menu {
+        position: absolute;
+        top: 100%;
+        left: 100%;
+        width: 100%;
+        height: calc(100vh - var(--header-size));
+        flex-direction: column;
+        padding: 20px 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        transition: left 0.3s ease-in-out;
+    }
+
+    .main-menu.active {
+        left: 0;
+    }
+
+    .main-menu > li ~ li {
+        margin-left: unset;
+        margin-top: 20px;
+    }
+
+    .main-menu a {
+        font-size: 20px;
+    }
+
+    .mb-menu-toggle {
+        display: block;
+    }
+
+    .hero-content {
+        padding-left: 10px;
+    }
+
+    .slide {
+        flex-direction: column-reverse;
+    }
+
+    .dish-info,
+    .dish-img {
+        width: unset;
+    }
+
+    .dish-info {
+        height: 45%;
+        margin-bottom: 160px;
+    }
+
+    .dish-img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .dish-img {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .dish-img > img {
+        height: 450px;
+        width: 1080px;
+        /* width: unset;
+        position: unset;
+        top: unset;
+        left: unset; */
+        margin: 0 auto;
+        margin-top: 400px;
+    }
+
+    .dish-name > h2 {
+        font-size: 50px;
+        padding: 0 12px;
+    }
+
+    .dish-description > p {
+        font-size: 14px;
+        line-height: 26px;
+        width: 100%;	
+        padding: 0 12px;
+    }
+
+    .dish-description,
+    .slide .btn {
+        margin-top: 10px;
+    }
+
+    .btn {
+        font-size: 20px;
+        height: 40px;
+    }
+
+    .slide.active .btn {
+        width: 250px;
+        margin-top: 30px;
+    }
+
+    .slider-control {
+       right: 10px;
+        bottom: 0;
+        left: unset;
+        transform: unset; 
+    }
+
+    .slider-control-item {
+        --size: 120px;
+    }
+
+    .slider-control-item ~ .slider-control-item {
+        margin-left: 5px;
+    }
+    .bx-menu {
+        display: block;
+        padding: 10px;
+        font-size: 38px;
+        color: var(--txt-color);
+        cursor: pointer;
+        margin-top: 40px;
+    }
+    .slider-control img {
+        width: 90px; /* Make image take the full width of the container */
+        height: auto; 
+        display: flex;/* Maintain aspect ratio */
+        margin-top: 12px;
+    }
+   
+}
+
+
+
+
+
+/* iphone 14 pro max  meida query*/
+
+@media screen and (min-width: 430px) and (max-width: 430px) {
+    :root {
+        --header-size: 50px;
+    }
+    .logo img {
+        width: 67%;
+        display: flex;
+        padding: 10px;
+        margin-top: 240px;
+    }
+    
+    .dish-img > img {
+        height: 570px;
+        width: 1100px;
+        margin: 0 auto;
+        margin-top: 360px;
+    }
+    .dish-info{
+        margin-bottom: 190px;
+    }
+    .bx-menu {
+        display: block;
+        padding: 10px;
+        font-size: 38px;
+        color: var(--txt-color);
+        cursor: pointer;
+        margin-top: 50px;
+    }
+    .slider-control-item img{
+       width: 110px;
+    }
+    .slider-control-item{
+        margin-right: 10px;
+        margin-bottom: 30px;
+    }
+   
+    .order-form-container{
+        height: 110vh;
+    }
+
+}
+
+
+/* ipad air */
+@media screen and (min-width: 830px) and (max-width: 822px) {
+    :root {
+        --header-size: 50px;
+    }
+
+    .logo > img {
+        height: 1px;
+        margin-right: 150px;
+    }
+
+    .dish-img > img {
+        height: 970px;
+        width: 1500px;
+        margin: 0 auto;
+        margin-top: 200px;
+    }
+    .dish-name > h2 {
+        font-size: 100px;
+    }
+    .dish-description > p {
+        font-size: 20px;
+        line-height: 26px;
+    }
+    .slide.active .btn {
+        width: 350px;
+        height: 70px;
+        margin-top: 50px;
+    }
+
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1194px) and (orientation: landscape) {
+    :root {
+        --header-size: 40px;
+    }
+    header {
+       
+    padding-right: 90px;
+    margin-top: 20px;
+      
+        justify-content: end;
+    }
+    .logo{
+        margin-right: 150px;
+        margin-top: 50px;
+    }
+    .dish-name > h2 {
+        font-size: 90px;
+        margin-top: 140px;
+    }
+    .dish-img > img {
+        height: 850px;
+        margin-top: 250px;
+    }
+   
+    
+}
+
+/* media screen for laptop 13 inch */
+/* Media screen for 13-inch laptop */
+@media screen and (min-width: 1280px) and (max-width: 1440px) {
+    :root {
+        --header-size: 45px;
+    }
+    header {
+        padding-right: 90px;
+        margin-top: 20px;
+        justify-content: end;
+        }
+
+    .logo > img {
+        margin-top: 420px;
+        margin-right: 400px;
+    }
+    
+    .dish-img > img {
+        height: 950px;
+        margin-top: 200px;
+    }
+    .dish-name > h2 {
+        font-size: 80px;
+        margin-top: 140px;
+       
+    }
+    
+    
+    .dish-description > p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .slide.active .btn {
+        width: 270px;
+        height: 70px;
+        margin-top: 50px;
+    }
+}
+
+
+
+/* Order Form Styling */
+.order-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+   
+    background-color: var(--main-color);
+     
+}
+
+.order-form-container {
+    background-color: var(--main-color);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 500px;
+    color: var(--txt-color);
+  
+}
+
+.order-form-container h1 {
+    font-family: BerlinSans, sans-serif;
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--txt-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-family: MyriadProBold, sans-serif;
+    margin-bottom: 8px;
+    color: #ccc;
+    font-size: 16px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #eee;
+    font-family: MyriadProRegular, sans-serif;
+    font-size: 16px;
+}
+
+.form-group input::placeholder {
+    color: #777;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--txt-color);
+    box-shadow: 0 0 6px rgba(254, 198, 41, 0.5);
+}
+
+.order-button {
+    width: 100%;
+    padding: 12px;
+    font-family: Bauhaus93, sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: var(--main-color);
+    background-color: var(--txt-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+.order-button:hover {
+    background-color: #ffd369;
+    transform: translateY(-3px);
+}
+
+.order-button:active {
+    transform: translateY(0);
+}
+
+
+/* Styling voor de gerechtenkaarten */
+.food-selection {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.food-item {
+    background-color: #444;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    width: 150px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.food-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.food-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.food-item p {
+    color: #eee;
+    font-family: MyriadProBold, sans-serif;
+    font-size: 16px;
+}
+
+.food-item input {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #eee;
+    font-family: MyriadProRegular, sans-serif;
+    font-size: 14px;
+}
+
+.total-price {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--txt-color);
+    text-align: center;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Food</title>
+    <link rel="stylesheet" href="app.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="submit.js" defer></script>
+    <style>
+        @media (max-width: 768px) {
+            .logo img {
+                display: none;
+            }
+        }
+        
+
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">
+            <img src="logo2.svg" alt="">
+        </a>
+        <ul class="main-menu" id="main-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About us</a></li>
+        </ul>
+        <span class="mb-menu-toggle" id="mb-menu-toggle">
+            <i class='bx bx-menu'></i>
+        </span>
+    </header>
+
+    <main class="order-section">
+  
+           
+        
+        <div class="order-form-container">
+            <h1>Plaats Uw Bestelling</h1>
+            <form id="order-form" action="https://formspree.io/f/mqakpkow" method="POST">
+                <input type="hidden" id="order-details" name="order-details" />
+
+                
+                <div class="form-group">
+                    <label for="name">Volledige Naam</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Your email address" />
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefoonnummer</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Your phone number" />
+                </div>
+
+                <div class="form-group">
+                    <label for="pickup-date">Afhaaldatum</label>
+                    <input type="date" id="pickup-date" name="pickup-date" required /> 
+                    <!-- Foutbericht dat verschijnt bij een onjuiste selectie -->
+                </div>
+            
+                
+                <div class="form-group">
+                    <label for="pickup-time">Afhaaltijd</label>
+                    <select id="pickup-time" name="pickup-time" required>
+                        <option value="" disabled selected>Kies een tijd</option>
+                        <option value="18:00">18:00</option>
+                        <option value="18:30">18:30</option>
+                        <option value="19:00">19:00</option>
+                        <option value="19:30">19:30</option>
+                    </select>
+                </div>
+
+               
+
+
+                <div class="food-selection">
+                    <div class="food-item">
+                        <img src="1.svg" alt="Roti">
+                        <p>Roti - €15</p>
+                        <input type="number" id="roti-quantity" name="roti-quantity" min="0" max="2" value="0" placeholder="Aantal">
+                    </div>
+                    <div class="food-item">
+                        <img src="eten2.svg" alt="Nasi">
+                        <p>Nasi - €15</p>
+                        <input type="number" id="nasi-quantity" name="nasi-quantity" min="0" max="2" value="0" placeholder="Aantal">
+                    </div>
+                    <div class="food-item">
+                        <img src="bami.svg" alt="Bami">
+                        <p>Bami - €15</p>
+                        <input type="number" id="bami-quantity" name="bami-quantity" min="0" max="2" value="0" placeholder="Aantal">
+                    </div>
+                </div>
+                <div id="total-price" class="total-price">Total Price: €0</div>
+                
+               
+                
+                
+
+       
+                <!-- https://docs.mollie.com/docs/libraries  als je klikt op de btn dan ga je naar mollie om te betalen.-->
+                   
+                
+                <button type="submit" class="order-button">Bestelling Plaatsen</button>
+                <button type="button" class="order-button" onclick="goToHome()">Annuleer Bestelling</button>
+                </form>
+                </div>
+               
+
+                </main>
+                
+                
+                <script>
+                    function goToHome() {
+    window.location.href = 'index.html'; // Vervang 'index.html' door de juiste URL van de homepage
+}
+
+
+                    const pickupDateInput = document.getElementById('pickup-date');
+                    const today = new Date();
+                    today.setDate(today.getDate() + 7); // Minimum date set to a week from today
+                    pickupDateInput.min = today.toISOString().split('T')[0]; // Format YYYY-MM-DD
+            
+                    pickupDateInput.addEventListener('change', () => {
+                        const selectedDate = new Date(pickupDateInput.value);
+                        if (selectedDate.getDay() !== 6) { // If not a Saturday
+                            pickupDateInput.value = ''; 
+                            Swal.fire({
+                                title: "Oops... 🤭",
+                                text: "Selecteer alstublieft een zaterdag voor afhalen.",
+                                icon: "error",
+                                confirmButtonText: "Ok"
+                            });
+                        }
+                    });
+
+
+                        const prices = {
+                        roti: 15,
+                        nasi: 15,
+                        bami: 15
+                        };
+
+                    function calculateTotal() {
+                    const rotiQty = parseInt(document.getElementById('roti-quantity').value) || 0;
+                    const nasiQty = parseInt(document.getElementById('nasi-quantity').value) || 0;
+                    const bamiQty = parseInt(document.getElementById('bami-quantity').value) || 0;
+
+                    // Bereken de totale prijs
+                    const totalPrice = (rotiQty * prices.roti) + (nasiQty * prices.nasi) + (bamiQty * prices.bami);
+                    document.getElementById('total-price').textContent = `Total Price: €${totalPrice}`;
+                }
+
+                // Functie om te controleren op maximaal 4 per gerecht
+                function checkMaxQuantity(inputElement) {
+                    const quantity = parseInt(inputElement.value) || 0;
+                    if (quantity > 2) {
+                        inputElement.value = 2; // Zet het terug naar 4
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Maximaal aantal per gerecht is 2',
+                            text: 'Verlaag het aantal voor dit gerecht.',
+                            confirmButtonText: 'Oké'
+                        });
+                    }
+                }
+
+                // Voeg event listeners toe voor input change om totale prijs te berekenen
+                document.getElementById('roti-quantity').addEventListener('input', (event) => {
+                    checkMaxQuantity(event.target);
+                    calculateTotal();
+                });
+                document.getElementById('nasi-quantity').addEventListener('input', (event) => {
+                    checkMaxQuantity(event.target);
+                    calculateTotal();
+                });
+                document.getElementById('bami-quantity').addEventListener('input', (event) => {
+                    checkMaxQuantity(event.target);
+                    calculateTotal();
+                });
+
+                    </script>           
+   
+                
+</body>
+</html>
