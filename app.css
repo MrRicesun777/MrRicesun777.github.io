@@ -334,7 +334,7 @@ header {
 
     .dish-info {
         height: 45%;
-        margin-bottom: 160px;
+        margin-bottom: 180px;
     }
 
     .dish-img {
@@ -349,14 +349,18 @@ header {
     }
 
     .dish-img > img {
-        height: 450px;
-        width: 880px;
+       
         /* width: unset;
         position: unset;
         top: unset;
         left: unset; */
+        
+
+        height: 450px;
+        width: 880px;
         margin: 0 auto;
-        margin-top: 400px;
+        margin-top: 340px;
+        margin-left: 100px;
     }
 
     .dish-name > h2 {
@@ -387,10 +391,9 @@ header {
     }
 
     .slider-control {
-       right: 10px;
-        bottom: 0;
         left: unset;
-        transform: unset; 
+        transform: unset;
+        top: 590px;
     }
 
     .slider-control-item {
