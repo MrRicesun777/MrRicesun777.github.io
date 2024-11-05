@@ -172,21 +172,35 @@
                     }
                 }
 
-                // Voeg event listeners toe voor input change om totale prijs te berekenen
-                document.getElementById('roti-quantity').addEventListener('input', (event) => {
-                    checkMaxQuantity(event.target);
-                    calculateTotal();
-                });
-                document.getElementById('nasi-quantity').addEventListener('input', (event) => {
-                    checkMaxQuantity(event.target);
-                    calculateTotal();
-                });
-                document.getElementById('bami-quantity').addEventListener('input', (event) => {
-                    checkMaxQuantity(event.target);
-                    calculateTotal();
-                });
 
-                    </script>           
+              
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const foodItem = urlParams.get('food-item');
+        const quantity = urlParams.get('quantity') || 0;
+
+        if (foodItem) {
+            document.getElementById(`${foodItem}-quantity`).value = quantity;
+        }
+
+        // Voeg hier de bestaande event listeners toe om de totale prijs te berekenen
+        document.getElementById('roti-quantity').addEventListener('input', (event) => {
+            checkMaxQuantity(event.target);
+            calculateTotal();
+        });
+        document.getElementById('nasi-quantity').addEventListener('input', (event) => {
+            checkMaxQuantity(event.target);
+            calculateTotal();
+        });
+        document.getElementById('bami-quantity').addEventListener('input', (event) => {
+            checkMaxQuantity(event.target);
+            calculateTotal();
+        });
+
+        // Bereken de totale prijs bij het laden van de pagina
+        calculateTotal();
+    });
+</script>        
    
                 
 </body>
