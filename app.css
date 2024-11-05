@@ -438,13 +438,15 @@ header {
     }
     
     .dish-img > img {
-        height: 570px;
-        width: 1100px;
-        margin: 0 auto;
-        margin-top: 360px;
+        height: 477px;
+        width: 1110px;
+        margin: 400px auto 0 auto;
     }
     .dish-info{
         margin-bottom: 190px;
+    }
+    .dish-description > p {
+        font-size: 18px;
     }
     .bx-menu {
         display: block;
@@ -461,7 +463,18 @@ header {
         margin-right: 10px;
         margin-bottom: 30px;
     }
-   
+    .slide.active .btn {
+        margin: 56px auto;
+    }
+    .slider-control{
+    top: 745px;
+    }
+    .slide.active .btn{
+        margin: 56px auto;
+        width: 310px;
+        height: 50px;
+    }
+
     .order-form-container{
         height: 110vh;
     }
