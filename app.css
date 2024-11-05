@@ -356,11 +356,9 @@ header {
         left: unset; */
         
 
-        height: 450px;
-        width: 880px;
-        margin: 0 auto;
-        margin-top: 340px;
-        margin-left: 100px;
+        height: 430px;
+        width: 1100px;
+        margin: 337px auto 0 auto;
     }
 
     .dish-name > h2 {
@@ -387,13 +385,15 @@ header {
 
     .slide.active .btn {
         width: 250px;
-        margin-top: 30px;
+        display: block;
+        align-content: center;
+        margin: 20px auto;
+        text-align: center;
     }
 
     .slider-control {
-        left: unset;
+        left: 10px;
         transform: unset;
-        top: 590px;
     }
 
     .slider-control-item {
@@ -463,7 +463,7 @@ header {
     }
    
     .order-form-container{
-        height: 120vh;
+        height: 110vh;
     }
 
 }
@@ -542,7 +542,7 @@ header {
 
     .logo > img {
         margin-top: 420px;
-        margin-right: 400px;
+        margin-right: 240px;
     }
     
     .dish-img > img {
